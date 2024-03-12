@@ -81,6 +81,8 @@ jobs:
         run: cargo +nightly update -Zminimal-versions
       - name: cargo test
         run: cargo test --locked --all-features --all-targets
+      - name: Cache Cargo dependencies
+        uses: Swatinem/rust-cache@v2
   os-check:
     # run cargo test on mac and windows
     runs-on: ${{ matrix.os }}
@@ -105,6 +107,8 @@ jobs:
         run: cargo generate-lockfile
       - name: cargo test
         run: cargo test --locked --all-features --all-targets
+      - name: Cache Cargo dependencies
+        uses: Swatinem/rust-cache@v2
   coverage:
     # use llvm-cov to build and collect coverage and outputs in a format that
     # is compatible with codecov.io
@@ -145,6 +149,8 @@ jobs:
         run: cargo llvm-cov --locked --all-features --lcov --output-path lcov.info
       - name: Record Rust version
         run: echo "RUST=$(rustc --version)" >> "$GITHUB_ENV"
+      - name: Cache Cargo dependencies
+        uses: Swatinem/rust-cache@v2
       - name: Upload to codecov.io
         uses: codecov/codecov-action@v4
         with:

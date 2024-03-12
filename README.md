@@ -10,18 +10,21 @@ This repository contains a collection of [reusable GitHub workflows] for use in 
 
 ## Rust Check
 
-Checks:
+[rust-check.yml](.github/workflows/rust-check.yml)
 
 - formatting using rustfmt
 - lints using clippy and [rs-clippy-check](https://github.com/marketplace/actions/rs-clippy-check)
 - docs (using nightly)
 - msrv
 
-[rust-check.yml](.github/workflows/rust-check.yml)
-
-Usage:
-
 ```yaml
+# .github/workflows/check.yml
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
 jobs:
   check:
     permissions:
@@ -35,14 +38,21 @@ jobs:
 
 [rust-test.yml](.github/workflows/rust-test.yml)
 
-Tests:
+Runs tests:
 
 - ubuntu with stable and beta
 - mac / windows with stable
 - minimal versions
-- upload coverage to codecov.io (requires CODECOV_TOKEN)
+- upload coverage to codecov.io (requires CODECOV_TOKEN to be added to the repository secrets)
 
 ```yaml
+# .github/workflows/test.yml
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
 jobs:
   test:
     uses: joshka/github-workflows/.github/workflows/rust-test.yml@main
@@ -50,13 +60,31 @@ jobs:
       CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
 ```
 
-## Rust  Release-plz
+## Rust Release-plz
 
-Publishes the crate using [Release-plz]. Requires some setup see ...
+[rust-release-plz.yml](.github/workflows/rust-replease-plz.yml)
+
+Publishes the crate using [Release-plz].
+
+Required Settings:
+
+- `Settings | Actions | General | Allow GitHub Actions to create and approve pull requests`:  \
+  ticked
+- `Settings | Secrets and Variables | Actions | Repository Secret | CARGO_REGISTRY_TOKEN`:  \
+  set to value from <https://crates.io/settings/tokens>
 
 [Release-plz]: https://release-plz.ieni.dev
 
 ```yaml
+# .github/workflows/release-plz.yml
+permissions:
+  pull-requests: write
+  contents: write
+
+on:
+  push:
+    branches:
+      - main
 jobs:
   release-plz:
     uses: joshka/github-workflows/.github/workflows/rust-release-plz.yml@main
