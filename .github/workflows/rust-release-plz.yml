@@ -1,5 +1,5 @@
 name: Release-plz
-# see https://marcoieni.github.io/release-plz/github/index.html#example-release-pr-and-release
+# see https://release-plz.ieni.dev/docs/github
 # for more information
 
 permissions:
