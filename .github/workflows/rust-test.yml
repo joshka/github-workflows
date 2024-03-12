@@ -10,6 +10,12 @@ name: Test
 # See check.yml for information about how the concurrency cancellation and workflow triggering works
 on:
   workflow_call:
+    inputs:
+      crate_type:
+        description: "The type of crate to test (lib or bin)"
+        required: false
+        default: "lib"
+        type: string
     secrets:
       CODECOV_TOKEN:
         description: "Token for codecov.io"
@@ -43,6 +49,7 @@ jobs:
       - name: cargo test --locked
         run: cargo test --locked --all-features --all-targets
       - name: cargo test --doc
+        if: ${{ inputs.crate_type == 'lib' }}
         run: cargo test --locked --all-features --doc
   minimal-versions:
     # This action chooses the oldest version of the dependencies permitted by Cargo.toml to ensure

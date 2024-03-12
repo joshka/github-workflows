@@ -56,6 +56,8 @@ on:
 jobs:
   test:
     uses: joshka/github-workflows/.github/workflows/rust-test.yml@main
+    with:
+      crate_type: lib # (optional) change to bin to avoid running cargo test --doc
     secrets:
       CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
 ```
