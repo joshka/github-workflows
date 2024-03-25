@@ -12,7 +12,7 @@ This repository contains a collection of [reusable GitHub workflows] for use in 
 
 - Fork this repo to your own user.
 - In your application or library crate, add 3 files pointing to your fork.
-- Copy the contents below and change the usernam (If you skip this step, any changes to this template will directly affect your builds).
+- Copy the contents below and change the username (If you skip this step, any changes to this template will directly affect your builds).
   - .github/workflows/check.yml
   - .github/workflows/test.yml
   - .github/workflows/release-plz.yml
