@@ -8,6 +8,17 @@ This repository contains a collection of [reusable GitHub workflows] for use in 
 
 [reusable GitHub workflows]: https://docs.github.com/en/actions/using-workflows/reusing-workflows
 
+## Usage
+
+- Fork this repo to your own user.
+- In your application or library crate, add 3 files pointing to your fork. Copy the contents below
+  and change the username. If you leave the username as mine, any changes to this template will
+  directly affect your build.
+  - .github/workflows/check.yml
+  - .github/workflows/test.yml
+  - .github/workflows/release-plz.yml
+- Follow the instructions on each of the workflows to set the right settings
+
 ## Rust Check
 
 [rust-check.yml](.github/workflows/rust-check.yml)
@@ -66,7 +77,8 @@ jobs:
 
 [rust-release-plz.yml](.github/workflows/rust-replease-plz.yml)
 
-Publishes the crate using [Release-plz].
+Publishes the crate using [Release-plz]. This is pretty neat, it automatically creates or updates
+a release PR every time you push to main. Merging the PR automatically releases your crate.
 
 Required Settings:
 
